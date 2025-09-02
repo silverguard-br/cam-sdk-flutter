@@ -3,6 +3,7 @@ description: "SDK Flutter para integração com o fluxo de **Contestação CAM**
 version: 0.0.1
 homepage: https://www.silverguard.com.br/
 
+#developed on flutter 3.35.2
 environment:
   sdk: ^3.8.1
   flutter: ">=1.17.0"

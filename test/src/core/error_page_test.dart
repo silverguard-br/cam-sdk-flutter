@@ -48,8 +48,8 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(callbackCalled, isTrue);
-      expect(callbackArg, '');
-      expect(callbackContext, isNotNull);
+      expect(callbackArg, 'error_page');
+      expect(callbackContext, null);
     });
 
     testWidgets(

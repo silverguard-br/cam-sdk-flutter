@@ -26,8 +26,8 @@ class SilverguardCAM {
       _silverGuardService?.baseUrl != null &&
       _silverGuardService!.baseUrl.isNotEmpty;
 
-  void _checkConfig() {
-    if (!_hasApiKey || !_hasBaseUrl) {
+ static void _checkConfig() {
+    if (_instance == null || !instance._hasApiKey || !instance._hasBaseUrl) {
       throw Exception("SilverguardCAM is not inialized. Call init() first.");
     }
   }
@@ -43,10 +43,12 @@ class SilverguardCAM {
   }
 
   static void setBackCallback(OnBackCallback onBackCallback) {
+    _checkConfig();
     instance._onBackCallback = onBackCallback;
   }
 
   static void getRequestUrlModel(BuildContext context, RequestUrlModel model) {
+    _checkConfig();
     instance._showPage(
       context,
       url: instance._silverGuardService!.postMedRequest(model),
@@ -54,14 +56,14 @@ class SilverguardCAM {
   }
 
   static void showList(BuildContext context, RequestListUrlModel model) {
+    _checkConfig();
     instance._showPage(
       context,
       url: instance._silverGuardService!.listUrl(model),
     );
   }
 
-  void _showPage(BuildContext context, {required Future<String> url}) {
-    _checkConfig();
+  void _showPage(BuildContext context, {required Future<String> url}) {    
     Navigator.of(context).push<MaterialPageRoute>(
       MaterialPageRoute(
         builder: (context) => WebviewCAMWidget(
