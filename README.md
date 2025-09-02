@@ -150,7 +150,7 @@ SilverguardCAM.showList(
 
 ---
 
-### 5. Exemplos de modelos enviados
+### 4. Exemplos de modelos enviados
 
 #### `RequestUrlModel` (nova contestação)
 
@@ -185,7 +185,7 @@ RequestListUrlModel(
 
 ---
 
-### 6. Captura de retorno
+### 5. Captura de retorno
 
 Defina uma função para callback e ser notificado quando o usuário aciona voltar dentro do fluxo.
 O SDK enviará um origin (string) indicando de qual tela/etapa o retorno ocorreu e finaliza a Activity do fluxo após o callback.
