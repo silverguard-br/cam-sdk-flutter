@@ -49,7 +49,7 @@ class ApiService {
     http.Response response,
     T Function(dynamic value) mapper,
   ) {
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       T? mapperModel;
       mapperModel = mapper(response.body);
       return SuccessResultApi<T>(data: mapperModel);
