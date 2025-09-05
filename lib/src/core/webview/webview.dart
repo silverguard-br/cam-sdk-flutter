@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:silverguard/silverguard.dart';
 import 'package:silverguard/src/core/webview/webview_bridge.dart';
+import 'package:silverguard/src/silverguard/silverguard_bridge.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 // #docregion platform_imports
 // Import for Android features.
@@ -13,15 +13,15 @@ import 'package:webview_flutter_android/webview_flutter_android.dart';
 class Webview with WebviewBridge {
   final WebViewController _controller;
   final BuildContext _context;
-  final OnBackCallback? _onBackCallback;
+  final SilverguardBridge? _silverguardBridge;
 
   const Webview(
     WebViewController controller,
     BuildContext context, {
-    OnBackCallback? onBackCallback,
+    SilverguardBridge? silverguardBridge,
   }) : _controller = controller,
        _context = context,
-       _onBackCallback = onBackCallback;
+       _silverguardBridge = silverguardBridge;
 
   void config(String url) {
     _setAndroidUploadFile(_controller);
@@ -34,7 +34,7 @@ class Webview with WebviewBridge {
   BuildContext get context => _context;
 
   @override
-  OnBackCallback? get onBackCallback => _onBackCallback;
+  SilverguardBridge? get silverguardBridge => _silverguardBridge;
 
   void _setAndroidUploadFile(WebViewController controller) {
     if (Platform.isAndroid) {
