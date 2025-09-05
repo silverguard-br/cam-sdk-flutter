@@ -185,13 +185,76 @@ RequestListUrlModel(
 
 ---
 
-### 5. Captura de retorno
+### 5. Comunicação webview ⇄ Flutter
 
-Defina uma função para callback e ser notificado quando o usuário aciona voltar dentro do fluxo.
-O SDK enviará um origin (string) indicando de qual tela/etapa o retorno ocorreu e finaliza a Activity do fluxo após o callback.
+A comunicação entre a SDK e o seu código é realizada através de um sistema de mensagens.
+O SDK já tem a parte de requisição de permissões implementada, mas se achar necessário você pode implementar seu próprio código. 
+As classes `SilverguardBridge` e `SilverguardPermissionBridge` dão a possibilidade de implementação de callbacks e/ou sobrepor o código permissões.
 
+`SilverguardBridge` - Contém apenas as ações de callback para a ação de voltar e command, que seria qualquer comando não mapeado no SDK.
+Exemplo:
 ```Dart
-SilverguardCAM.setBackCallback(void Function(String backOrigin));
+class CustomBridge implements SilverguardBridge {
+  @override
+  void onBackCallback(String origin) {    
+    // Informa que o usuário retornou e em $origin qual fluxo.
+  }
+
+  @override
+  void onCommandCallback(String command) {
+    // Retorna em $command todo comando retornado da webview sem mapeamento no SDK
+  }  
+}
+```
+
+`SilverguardPermissionBridge` - Além dos callbacks de `SilverguardBridge`, permite sobrepor o código de permissão de microfone e arquivos.
+Exemplo:
+```Dart
+class CustomBridgeWithPermission implements SilverguardPermissionBridge {
+
+  @override
+  void onBackCallback(String origin) {
+    // Informa que o usuário retornou e em $origin qual fluxo.
+  }
+  
+  @override
+  void onWebviewCallback(String command) {
+    // Informa todo comando retornado da webview sem mapeamento no SDK
+  }
+  
+  @override
+  void onRequestLibraryPermission() {
+    // Código que será chamado no momento em que a webview for checar a permissão de acesso aos arquivos
+  }
+  
+  @override
+  void onRequestMicrophonePermission() {
+    // Código que será chamado no momento em que a webview for checar a permissão de acesso microfone
+  }  
+}
+```
+
+Após a criação da classe, você deve passa-la para SDK, para que seu código seja chamado, conforme abaixo:
+
+Código passando `SilverguardBridge`
+```Dart 
+final customBridge = CustomBridge();
+
+SilverguardCAM.setSilverguardBridge(customBridge)
+```
+
+Código passando `SilverguardPermissionBridge`
+```Dart
+final customBridgeWithPermission = CustomBridgeWithPermission();
+
+SilverguardCAM.setSilverguardBridge(customBridgeWithPermission)
+```
+
+OBS: Você deve criar e passar a classe `SilverguardBridge` ou a classe `SilverguardPermissionBridge`.
+A classe `SilverguardCAM` é um singleton, então, a cada chamada da função `setSilverguardBridge` a chamada anterior será sobreposta com a nova.
+Para remover os callbacks pode ser passado a qualquer momento null para a função.
+```Dart
+SilverguardCAM.setSilverguardBridge(null)
 ```
 
 ## 📄 Licença
