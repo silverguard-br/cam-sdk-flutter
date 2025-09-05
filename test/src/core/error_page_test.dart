@@ -48,7 +48,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(callbackCalled, isTrue);
-      expect(callbackArg, 'error_page');
+      expect(callbackArg, 'ERROR_PAGE');
       expect(callbackContext, null);
     });
 
