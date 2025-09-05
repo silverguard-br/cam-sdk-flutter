@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:silverguard/silverguard.dart';
 import 'package:silverguard/src/core/webview/error_page.dart';
 import 'package:silverguard/src/core/webview/webview.dart';
+import 'package:silverguard/src/silverguard/silverguard_bridge.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebviewCAMWidget extends StatefulWidget {
   final Future<String> Function() loadUrl;
-  final OnBackCallback? onBackCallback;
+  final SilverguardBridge? silverguardBridge;
   final Webview? webview;
 
   const WebviewCAMWidget({
     required this.loadUrl,
-    this.onBackCallback,
+    this.silverguardBridge,
     this.webview,
     super.key,
   });
@@ -32,7 +32,7 @@ class _WebviewCAMWidgetState extends State<WebviewCAMWidget> {
         Webview(
           WebViewController(onPermissionRequest: (request) => request.grant()),
           context,
-          onBackCallback: widget.onBackCallback,
+          silverguardBridge: widget.silverguardBridge,
         );
   }
 
@@ -43,7 +43,7 @@ class _WebviewCAMWidgetState extends State<WebviewCAMWidget> {
       if (snapshot.connectionState == ConnectionState.waiting) {
         return Scaffold(body: Center(child: CircularProgressIndicator()));
       } else if (snapshot.hasError || snapshot.data == null) {
-        return ErrorPage(onBackCallback: widget.onBackCallback);
+        return ErrorPage(onBackCallback: widget.silverguardBridge?.onBackCallback);
       }
       webView.config(snapshot.data!);
       return Scaffold(body: SafeArea(child: webView.open()));

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:silverguard/src/silverguard_cam.dart';
 
 class ErrorPage extends StatelessWidget {
-  final OnBackCallback? onBackCallback;
+  final Function(String origin)? onBackCallback;
 
   const ErrorPage({super.key, required this.onBackCallback});
 
   void _goBack(BuildContext context) {
     if (onBackCallback != null) {
-      // TODO(origin) : add real origin
-      onBackCallback?.call('error_page');
+      onBackCallback?.call('ERROR_PAGE');
     }
     Navigator.of(context).pop();
   }

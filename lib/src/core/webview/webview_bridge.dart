@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:silverguard/silverguard.dart';
+import 'package:silverguard/src/silverguard/silverguard_bridge.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 extension ToWebviewCommand on JavaScriptMessage {
@@ -30,7 +30,13 @@ enum WebviewCommand {
 
 mixin WebviewBridge {
   BuildContext get context;
-  OnBackCallback? get onBackCallback;
+  SilverguardBridge? get silverguardBridge;
+
+  SilverguardPermissionBridge? get permissionBridge =>
+      (silverguardBridge != null &&
+          silverguardBridge is SilverguardPermissionBridge)
+      ? (silverguardBridge as SilverguardPermissionBridge)
+      : null;
 
   void addJavaScriptChannels(WebViewController controller) {
     controller
@@ -50,11 +56,9 @@ mixin WebviewBridge {
                 _onBackCommand(context, message.origin);
                 break;
               default:
-              // TODO (javascript): what to do when unknown javascript command
+                _onUnkownCommand(message.message);
             }
-          } catch (e) {
-            // TODO (javascript): what to do when error javascript command
-          }
+          } catch (_) {}
         },
       );
   }
@@ -66,22 +70,29 @@ mixin WebviewBridge {
   }
 
   Future<void> _requestMicrophonePermission() async {
+    if (permissionBridge != null) {
+      return permissionBridge?.onRequestMicrophonePermission();
+    }
     final status = await Permission.microphone.request();
     _checkStatus(status);
   }
 
   Future<void> _requestLibraryPermission() async {
+    if (permissionBridge != null) {
+      return permissionBridge?.onRequestLibraryPermission();
+    }
     final status = await Permission.mediaLibrary.request();
     _checkStatus(status);
   }
 
-  Future<void> _onBackCommand(BuildContext context, String origin) async {
+  void _onBackCommand(BuildContext context, String origin) async {
+    silverguardBridge?.onBackCallback(origin);
     if (context.mounted) {
-      if (onBackCallback != null) {
-        onBackCallback!(origin);
-        return;
-      }
       Navigator.of(context).pop();
     }
+  }
+
+  void _onUnkownCommand(String command) async {
+    silverguardBridge?.onCommandCallback(command);
   }
 }
