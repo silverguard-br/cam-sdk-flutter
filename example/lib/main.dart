@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:example/custom_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:silverguard/silverguard.dart';
 
@@ -32,6 +33,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final customBridge = CustomBridge();
+  final customBridgeWithPermission = CustomBridgeWithPermission();
+
   @override
   void initState() {
     super.initState();
@@ -59,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
+          spacing: 8,
           children: [
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -90,7 +95,6 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text('Get Request URL'),
             ),
-            SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blueGrey,
@@ -103,6 +107,32 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
               child: const Text('Show List'),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blueGrey,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () =>
+                  SilverguardCAM.setSilverguardBridge(customBridge),
+              child: const Text('Add Custom Bridge'),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blueGrey,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () =>
+                  SilverguardCAM.setSilverguardBridge(customBridge),
+              child: const Text('Add Custom Bridge With Permission'),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blueGrey,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () => SilverguardCAM.setSilverguardBridge(null),
+              child: const Text('Remove custom bridge'),
             ),
           ],
         ),
