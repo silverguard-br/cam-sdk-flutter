@@ -13,7 +13,7 @@ dependencies:
     silverguard:
         git: 
             url: https://github.com/silverguard-br/cam-sdk-flutter.git
-            ref: 1.0.0
+            ref: 1.2.0
 ```
 
 E execute:
