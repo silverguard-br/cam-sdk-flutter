@@ -11,12 +11,12 @@ void main() {
         MaterialApp(home: ErrorPage(onBackCallback: null)),
       );
 
-      expect(find.text('Contextação via MED'), findsOneWidget);
+      expect(find.text('Contestação via MED'), findsOneWidget);
       expect(find.byIcon(Icons.close), findsOneWidget);
       expect(find.byIcon(Icons.error_outline), findsOneWidget);
       expect(
         find.text(
-          'Infelizmente não podemos seguir com sua contextação via MED',
+          'Infelizmente não podemos seguir com sua contestação via MED',
         ),
         findsOneWidget,
       );
