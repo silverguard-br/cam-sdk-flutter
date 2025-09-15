@@ -16,7 +16,7 @@ class ErrorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Contextação via MED'),
+        title: const Text('Contestação via MED'),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.close),
@@ -49,7 +49,7 @@ class ErrorPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      'Infelizmente não podemos seguir com sua contextação via MED',
+                      'Infelizmente não podemos seguir com sua contestação via MED',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 20,
