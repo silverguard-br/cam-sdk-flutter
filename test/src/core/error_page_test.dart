@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:silverguard/src/core/webview/error_page.dart';
+import 'package:silverguard/silverguard.dart';
+import 'package:silverguard/src/core/webview/pages/error_page.dart';
 
 void main() {
   group('ErrorPage', () {
@@ -8,7 +9,12 @@ void main() {
       WidgetTester tester,
     ) async {
       await tester.pumpWidget(
-        MaterialApp(home: ErrorPage(onBackCallback: null)),
+        MaterialApp(
+          home: ErrorPage(
+            onBackCallback: null,
+            silverguardTheme: SilverguardTheme(),
+          ),
+        ),
       );
 
       expect(find.text('Contestação via MED'), findsOneWidget);
@@ -41,7 +47,12 @@ void main() {
       }
 
       await tester.pumpWidget(
-        MaterialApp(home: ErrorPage(onBackCallback: onBack)),
+        MaterialApp(
+          home: ErrorPage(
+            onBackCallback: onBack,
+            silverguardTheme: SilverguardTheme(),
+          ),
+        ),
       );
 
       await tester.tap(find.byIcon(Icons.close));
@@ -62,7 +73,12 @@ void main() {
         }
 
         await tester.pumpWidget(
-          MaterialApp(home: ErrorPage(onBackCallback: onBack)),
+          MaterialApp(
+            home: ErrorPage(
+              onBackCallback: onBack,
+              silverguardTheme: SilverguardTheme(),
+            ),
+          ),
         );
 
         await tester.tap(find.text('Finalizar'));
@@ -76,7 +92,12 @@ void main() {
       WidgetTester tester,
     ) async {
       await tester.pumpWidget(
-        MaterialApp(home: ErrorPage(onBackCallback: null)),
+        MaterialApp(
+          home: ErrorPage(
+            onBackCallback: null,
+            silverguardTheme: SilverguardTheme(),
+          ),
+        ),
       );
 
       await tester.tap(find.byIcon(Icons.close));
