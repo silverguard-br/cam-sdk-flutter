@@ -251,10 +251,52 @@ SilverguardCAM.setSilverguardBridge(customBridgeWithPermission)
 ```
 
 OBS: Você deve criar e passar a classe `SilverguardBridge` ou a classe `SilverguardPermissionBridge`.
-A classe `SilverguardCAM` é um singleton, então, a cada chamada da função `setSilverguardBridge` a chamada anterior será sobreposta com a nova.
+A classe `SilverguardCAM` é um singleton, então, a cada chamada da função `setSilverguardBridge` o valor anterior será sobreposto com o novo.
 Para remover os callbacks pode ser passado a qualquer momento null para a função.
 ```Dart
 SilverguardCAM.setSilverguardBridge(null)
+```
+
+### 6. Customização de Estilo (Opcional)
+
+Você pode personalizar cores e fontes do SDK sobrepondo o tema base passando a classe `SilverguardTheme`.
+Você deve passar opcionalmente para a classe o `SilverguardThemeTextStyles` e/ou o `SilverguardThemeColors` com o estilo de fonte ou cor que deseja para ser aplicado nas telas.
+
+Exemplo de utilização:
+```Dart 
+SilverguardCAM.setSilverGuardTheme(
+  SilverguardTheme(
+    colors: SilverguardThemeColors(
+      background: Colors.grey[300]!,
+      primary: Colors.red,
+      label: Colors.white,
+      buttonTitle: Colors.white,
+      buttonEnabled: Colors.red,
+      buttonDisabled: Colors.blueGrey,
+    ),
+    textStyle: SilverguardThemeTextStyles(
+      button: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+      ),
+      body: TextStyle(fontSize: 16),
+      headline2: TextStyle(
+        fontSize: 28,
+        fontWeight: FontWeight.bold,
+      ),
+      headline3: TextStyle(
+        fontSize: 22,
+        fontWeight: FontWeight.w600,
+      ),
+    ),
+  ),
+),
+```
+
+A classe `SilverguardCAM` é um singleton, então, a cada chamada da função `setSilverGuardTheme` o valor anterior será sobreposto com o novo.
+Para remover o tema adicionado, voltando para o tema padrão, pode ser passado a qualquer momento null para a função.
+```Dart
+SilverguardCAM.setSilverGuardTheme(null)
 ```
 
 ## 📄 Licença
