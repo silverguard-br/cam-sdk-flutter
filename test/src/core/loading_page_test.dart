@@ -1,32 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:silverguard/silverguard.dart';
-import 'package:silverguard/src/core/webview/pages/error_page.dart';
+import 'package:silverguard/src/core/webview/pages/loading_page.dart';
 
 import '../golden.dart';
 
-Widget getBuilder({
-  dynamic Function(String)? onBackCallback,
-  SilverguardTheme? silverguardTheme,
-}) => Scaffold(
-  body: ErrorPage(
-    onBackCallback: onBackCallback,
-    silverguardTheme: silverguardTheme ?? SilverguardTheme(),
-  ),
+Widget getBuilder({SilverguardTheme? silverguardTheme}) => Scaffold(
+  body: LoadingPage(silverguardTheme: silverguardTheme ?? SilverguardTheme()),
 );
 
 Future<void> pump(
   WidgetTester tester, {
-  dynamic Function(String)? onBackCallback,
   SilverguardTheme? silverguardTheme,
 }) async {
   await tester.pumpWidget(
-    MaterialApp(
-      home: getBuilder(
-        onBackCallback: onBackCallback,
-        silverguardTheme: silverguardTheme,
-      ),
-    ),
+    MaterialApp(home: getBuilder(silverguardTheme: silverguardTheme)),
   );
 }
 
@@ -34,13 +22,15 @@ void main() {
   group('ErrorPage', () {
     testGolden(
       'Should render successfully',
-      fileName: 'error_page',
+      fileName: 'loading_page',
+      pumpBeforeTest: (tester) => tester.pump(Duration(seconds: 1)),
       builder: getBuilder(),
     );
 
     testGolden(
       'Should render with custom theme',
-      fileName: 'error_page_custom_theme',
+      fileName: 'loading_page_custom_theme',
+      pumpBeforeTest: (tester) => tester.pump(Duration(seconds: 1)),
       builder: getBuilder(
         silverguardTheme: SilverguardTheme(
           textStyle: SilverguardThemeTextStyles(
@@ -59,24 +49,6 @@ void main() {
           ),
         ),
       ),
-    );
-
-    testWidgets(
-      'calls onBackPressed and pops when Finalizar button is tapped',
-      (WidgetTester tester) async {
-        bool callbackCalled = false;
-
-        void onBack(String arg) {
-          callbackCalled = true;
-        }
-
-        await pump(tester, onBackCallback: onBack);
-
-        await tester.tap(find.text('Finalizar'));
-        await tester.pumpAndSettle();
-
-        expect(callbackCalled, isTrue);
-      },
     );
   });
 }
