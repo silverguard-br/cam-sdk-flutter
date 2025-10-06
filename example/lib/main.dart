@@ -15,9 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
-      ),
+      theme: ThemeData(),
       home: MyHomePage(title: 'Teste'),
     );
   }
@@ -65,11 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: 8,
           children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blueGrey,
-                foregroundColor: Colors.white,
-              ),
+            _Button(
               onPressed: () {
                 SilverguardCAM.getRequestUrlModel(
                   context,
@@ -93,50 +87,87 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 );
               },
-              child: const Text('Get Request URL'),
+              title: 'Get Request URL',
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blueGrey,
-                foregroundColor: Colors.white,
-              ),
+            _Button(
               onPressed: () {
                 SilverguardCAM.showList(
                   context,
                   RequestListUrlModel(reporterClientId: "12345678901"),
                 );
               },
-              child: const Text('Show List'),
+              title: 'Show List',
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blueGrey,
-                foregroundColor: Colors.white,
-              ),
+            _Button(
               onPressed: () =>
                   SilverguardCAM.setSilverguardBridge(customBridge),
-              child: const Text('Add Custom Bridge'),
+              title: 'Add Custom Bridge',
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blueGrey,
-                foregroundColor: Colors.white,
-              ),
+            _Button(
               onPressed: () =>
                   SilverguardCAM.setSilverguardBridge(customBridge),
-              child: const Text('Add Custom Bridge With Permission'),
+              title: 'Add Custom Bridge With Permission',
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blueGrey,
-                foregroundColor: Colors.white,
-              ),
+            _Button(
               onPressed: () => SilverguardCAM.setSilverguardBridge(null),
-              child: const Text('Remove custom bridge'),
+              title: 'Remove custom bridge',
+            ),
+            _Button(
+              onPressed: () => SilverguardCAM.setSilverGuardTheme(
+                SilverguardTheme(
+                  colors: SilverguardThemeColors(
+                    background: Colors.grey[300]!,
+                    primary: Colors.red,
+                    label: Colors.white,
+                    buttonTitle: Colors.white,
+                    buttonEnabled: Colors.red,
+                    buttonDisabled: Colors.blueGrey,
+                  ),
+                  textStyle: SilverguardThemeTextStyles(
+                    button: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    body: TextStyle(fontSize: 16),
+                    headline2: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    headline3: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+              title: 'Add Custom Theme',
+            ),
+            _Button(
+              onPressed: () => SilverguardCAM.setSilverGuardTheme(null),
+              title: 'Remove custom theme',
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _Button extends StatelessWidget {
+  final String title;
+  final void Function() onPressed;
+
+  const _Button({required this.title, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.blueGrey,
+        foregroundColor: Colors.white,
+      ),
+      onPressed: onPressed,
+      child: Text(title),
     );
   }
 }

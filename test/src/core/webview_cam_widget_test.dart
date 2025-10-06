@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:silverguard/silverguard.dart';
 import 'package:silverguard/src/core/webview/webview_cam_widget.dart';
-import 'package:silverguard/src/core/webview/error_page.dart';
+import 'package:silverguard/src/core/webview/pages/error_page.dart';
 
 import '../../mocks/mocks.dart';
 
@@ -21,6 +22,7 @@ void main() {
           home: WebviewCAMWidget(
             loadUrl: () => completer.future,
             webview: webview,
+            silverguardTheme: SilverguardTheme(),
           ),
         ),
       );
@@ -33,6 +35,7 @@ void main() {
           home: WebviewCAMWidget(
             loadUrl: () async => throw Exception('error'),
             webview: webview,
+            silverguardTheme: SilverguardTheme(),
           ),
         ),
       );
@@ -46,6 +49,7 @@ void main() {
           home: WebviewCAMWidget(
             loadUrl: () async => throw Exception('error'),
             webview: webview,
+            silverguardTheme: SilverguardTheme(),
           ),
         ),
       );
@@ -63,6 +67,7 @@ void main() {
           home: WebviewCAMWidget(
             loadUrl: () async => 'https://example.com',
             webview: webview,
+            silverguardTheme: SilverguardTheme(),
           ),
         ),
       );

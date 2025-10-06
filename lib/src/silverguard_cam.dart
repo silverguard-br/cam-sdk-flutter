@@ -6,17 +6,17 @@ import 'package:silverguard/src/silverguard/model/request_list_url_model.dart';
 import 'package:silverguard/src/silverguard/model/request_url_model.dart';
 import 'package:silverguard/src/silverguard/provider/silver_guard_provider.dart';
 import 'package:silverguard/src/silverguard/silverguard_bridge.dart';
+import 'package:silverguard/src/silverguard/silverguard_theme.dart';
 
 class SilverguardCAM {
   final SilverGuardProvider? _silverGuardService;
 
+  static SilverguardCAM? _instance;
+  static SilverguardCAM get instance => _instance!;
   SilverguardCAM._internal(this._silverGuardService);
 
-  static SilverguardCAM? _instance;
-
-  static SilverguardCAM get instance => _instance!;
-
   SilverguardBridge? _silverguardBridge;
+  SilverguardTheme _silverguardTheme = SilverguardTheme();
 
   bool get _hasApiKey =>
       _silverGuardService?.apiKey != null &&
@@ -46,6 +46,11 @@ class SilverguardCAM {
     instance._silverguardBridge = silverguardBridge;
   }
 
+  static void setSilverGuardTheme(SilverguardTheme? silverguardTheme) {
+    _checkConfig();
+    instance._silverguardTheme = silverguardTheme ?? SilverguardTheme();
+  }
+
   static void getRequestUrlModel(BuildContext context, RequestUrlModel model) {
     _checkConfig();
     instance._showPage(
@@ -68,6 +73,7 @@ class SilverguardCAM {
         builder: (context) => WebviewCAMWidget(
           loadUrl: () => url,
           silverguardBridge: _silverguardBridge,
+          silverguardTheme: _silverguardTheme,
         ),
       ),
     );
