@@ -121,20 +121,7 @@ SilverguardCAM.getRequestUrlModel(
     RequestUrlModel(
         transactionId: generateRandomId(),
         transactionAmount: 150.0,
-        transactionTime: "2025-07-11 11:10:00",
-        transactionDescription: "Pagamento via PIX",
-        reporterClientName: "John Doe",
-        reporterClientId: '123456789',
-        contestedParticipantId: "123456",
-        counterpartyClientName: "Maria dos Santos",
-        counterpartyClientId: '987654321',
-        counterpartyClientKey: "DEST_KEY_1",
-        protocolId: "PROT_2025_001",
-        pixAuto: true,
-        clientId: "CLI_456789",
-        clientSince: "2020-01-15",
-        clientBirth: "1985-03-22",
-        autofraudRisk: true,
+        transactionTime: "2025-07-11 11:10:00",        
     ),
 );
 ```
@@ -144,7 +131,9 @@ SilverguardCAM.getRequestUrlModel(
 ```Dart
 SilverguardCAM.showList(
     context,
-    RequestListUrlModel(reporterClientId: "12345678901"),
+    RequestListUrlModel(
+        reporterClientId: "12345678901"
+    ),
 )
 ```
 
@@ -172,6 +161,8 @@ RequestUrlModel(
     clientSince: "2020-01-15",
     clientBirth: "1985-03-22",
     autofraudRisk: true,
+    reporterBranchNumber: "1234",
+    reporterAccountNumber: "1234567-8"
 )
 ```
 
@@ -179,7 +170,9 @@ RequestUrlModel(
 
 ```Dart
 RequestListUrlModel(
-    reporter_client_id = "12345678901"
+    reporter_client_id: "12345678901",
+    reporterBranchNumber: "1234",
+    reporterAccountNumber: "1234567-8"
 )
 ```
 
