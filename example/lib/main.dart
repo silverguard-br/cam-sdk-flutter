@@ -84,6 +84,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     clientSince: "2020-01-15",
                     clientBirth: "1985-03-22",
                     autofraudRisk: true,
+                    reporterBranchNumber: "1234",
+                    reporterAccountNumber: "1234567-8",
                   ),
                 );
               },
@@ -93,7 +95,11 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 SilverguardCAM.showList(
                   context,
-                  RequestListUrlModel(reporterClientId: "12345678901"),
+                  RequestListUrlModel(
+                    reporterClientId: "12345678901",
+                    reporterBranchNumber: "1234",
+                    reporterAccountNumber: "1234567-8",
+                  ),
                 );
               },
               title: 'Show List',
