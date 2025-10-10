@@ -15,6 +15,8 @@ class RequestUrlModel {
   final String? clientSince;
   final String? clientBirth;
   final bool autofraudRisk;
+  final String? reporterBranchNumber;
+  final String? reporterAccountNumber;
 
   const RequestUrlModel({
     required this.transactionId,
@@ -23,6 +25,8 @@ class RequestUrlModel {
     this.transactionDescription,
     this.reporterClientName,
     this.reporterClientId,
+    this.reporterBranchNumber,
+    this.reporterAccountNumber,
     this.contestedParticipantId,
     this.counterpartyClientName,
     this.counterpartyClientId,
@@ -59,6 +63,10 @@ class RequestUrlModel {
       if (clientSince != null) "client_since": clientSince!,
       if (clientBirth != null) "client_birth": clientBirth!,
       "autofraud_risk": autofraudRisk,
+      if (reporterBranchNumber != null)
+        "reporter_branch_number": reporterBranchNumber!,
+      if (reporterAccountNumber != null)
+        "reporter_account_number": reporterAccountNumber!,
     };
   }
 }

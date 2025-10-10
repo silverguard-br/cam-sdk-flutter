@@ -21,6 +21,8 @@ void main() {
         clientSince: '2020-01-01',
         clientBirth: '1990-05-05',
         autofraudRisk: true,
+        reporterBranchNumber: '001',
+        reporterAccountNumber: '123456-7',
       );
 
       expect(model.toJson(), {
@@ -40,6 +42,8 @@ void main() {
         "client_since": '2020-01-01',
         "client_birth": '1990-05-05',
         "autofraud_risk": true,
+        'reporter_branch_number': '001',
+        'reporter_account_number': '123456-7',
       });
     });
 
@@ -69,6 +73,8 @@ void main() {
       expect(json.containsKey("client_id"), false);
       expect(json.containsKey("client_since"), false);
       expect(json.containsKey("client_birth"), false);
+      expect(json.containsKey("reporter_branch_number"), false);
+      expect(json.containsKey("reporter_account_number"), false);
     });
 
     test('pixAuto and autofraudRisk default to false', () {
