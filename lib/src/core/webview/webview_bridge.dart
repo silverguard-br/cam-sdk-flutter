@@ -41,6 +41,7 @@ mixin WebviewBridge {
   void addJavaScriptChannels(WebViewController controller) {
     controller
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..enableZoom(false)
       ..addJavaScriptChannel(
         'AndroidBridge',
         onMessageReceived: (JavaScriptMessage message) {
