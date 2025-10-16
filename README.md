@@ -162,7 +162,7 @@ RequestUrlModel(
     clientBirth: "1985-03-22",
     autofraudRisk: true,
     reporterBranchNumber: "1234",
-    reporterAccountNumber: "1234567-8"
+    reporterAccountNumber: "12345678"
 )
 ```
 
@@ -172,7 +172,7 @@ RequestUrlModel(
 RequestListUrlModel(
     reporter_client_id: "12345678901",
     reporterBranchNumber: "1234",
-    reporterAccountNumber: "1234567-8"
+    reporterAccountNumber: "12345678"
 )
 ```
 

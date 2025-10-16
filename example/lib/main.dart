@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   RequestUrlModel(
                     transactionId: generateRandomId(),
                     transactionAmount: 150.0,
-                    transactionTime: "2025-07-11 11:10:00",
+                    transactionTime: "2025-10-11 11:10:00",
                     transactionDescription: "Pagamento via PIX",
                     reporterClientName: "John Doe",
                     reporterClientId: '123456789',
@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     clientBirth: "1985-03-22",
                     autofraudRisk: true,
                     reporterBranchNumber: "1234",
-                    reporterAccountNumber: "1234567-8",
+                    reporterAccountNumber: "12345678",
                   ),
                 );
               },
@@ -98,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   RequestListUrlModel(
                     reporterClientId: "12345678901",
                     reporterBranchNumber: "1234",
-                    reporterAccountNumber: "1234567-8",
+                    reporterAccountNumber: "12345678",
                   ),
                 );
               },
