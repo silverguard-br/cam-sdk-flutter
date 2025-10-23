@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:example/custom_bridge.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:silverguard/silverguard.dart';
 
 void main() {
@@ -54,6 +55,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    String transactionTime = DateFormat(
+      'yyyy-MM-dd HH:mm:ss',
+    ).format(DateTime.now().subtract(const Duration(days: 5)));
+
     return Scaffold(
       appBar: AppBar(title: const Text('Silverguard CAM')),
       body: Padding(
@@ -70,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   RequestUrlModel(
                     transactionId: generateRandomId(),
                     transactionAmount: 150.0,
-                    transactionTime: "2025-10-11 11:10:00",
+                    transactionTime: transactionTime,
                     transactionDescription: "Pagamento via PIX",
                     reporterClientName: "John Doe",
                     reporterClientId: '123456789',
