@@ -24,12 +24,19 @@ class WebviewCAMWidget extends StatefulWidget {
   State<WebviewCAMWidget> createState() => _WebviewCAMWidgetState();
 }
 
-class _WebviewCAMWidgetState extends State<WebviewCAMWidget> {
+class _WebviewCAMWidgetState extends State<WebviewCAMWidget>
+    with AutomaticKeepAliveClientMixin {
   late final Webview webView;
+  late Future<String> _loadUrlFuture;
+  bool loaded = false;
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
     super.initState();
+    _loadUrlFuture = widget.loadUrl();
 
     webView =
         widget.webview ??
@@ -41,24 +48,32 @@ class _WebviewCAMWidgetState extends State<WebviewCAMWidget> {
   }
 
   @override
-  Widget build(BuildContext context) => PageBase(
-    silverguardTheme: widget.silverguardTheme,
-    child: FutureBuilder(
-      future: widget.loadUrl(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
+  Widget build(BuildContext context) {
+    super.build(context);
+    return PageBase(
+      silverguardTheme: widget.silverguardTheme,
+      child: FutureBuilder(
+        future: _loadUrlFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasData) {
+              if (!loaded) {
+                webView.config(snapshot.data!);
+                loaded = true;
+              }
+              return webView.open();
+            } else {
+              return ErrorPage(
+                onBackCallback: widget.silverguardBridge?.onBackCallback,
+                silverguardTheme: widget.silverguardTheme,
+              );
+            }
+          }
           return LoadingPage(silverguardTheme: widget.silverguardTheme);
-        } else if (snapshot.hasError || snapshot.data == null) {
-          return ErrorPage(
-            onBackCallback: widget.silverguardBridge?.onBackCallback,
-            silverguardTheme: widget.silverguardTheme,
-          );
-        }
-        webView.config(snapshot.data!);
-        return webView.open();
-      },
-    ),
-  );
+        },
+      ),
+    );
+  }
 }
 
 class PageBase extends StatelessWidget {
