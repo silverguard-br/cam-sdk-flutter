@@ -170,8 +170,8 @@ RequestUrlModel(
     clientSince: "2020-01-15",
     clientBirth: "1985-03-22",
     autofraudRisk: true,
-    reporterBranchNumber: "1234",
-    reporterAccountNumber: "12345678"
+    reporterBranchNumber: 1234,
+    reporterAccountNumber: 12345678
 )
 ```
 
@@ -180,8 +180,8 @@ RequestUrlModel(
 ```Dart
 RequestListUrlModel(
     reporter_client_id: "12345678901",
-    reporterBranchNumber: "1234",
-    reporterAccountNumber: "12345678"
+    reporterBranchNumber: 1234,
+    reporterAccountNumber: 12345678
 )
 ```
 
