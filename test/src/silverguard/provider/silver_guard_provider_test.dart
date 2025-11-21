@@ -53,6 +53,12 @@ void main() {
         transactionId: 'tx123',
         transactionAmount: 100,
         transactionTime: '2024-06-01T12:00:00Z',
+        reporterClientName: 'Alice',
+        reporterClientId: 'client123',
+        contestedParticipantId: 'participant456',
+        counterpartyClientName: 'Bob',
+        counterpartyClientId: 'client789',
+        counterpartyClientKey: 'key987',
       );
 
       final uri = Uri.https(baseUrl, '/api/v1/med-requests');

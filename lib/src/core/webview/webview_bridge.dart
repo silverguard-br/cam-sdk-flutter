@@ -20,6 +20,7 @@ extension ToWebviewCommand on JavaScriptMessage {
 enum WebviewCommand {
   requestMicrophonePermission('requestMicrophonePermission'),
   requestLibraryPermission('requestLibraryPermission'),
+  requestCameraPermission('requestCameraPermission'),
   back('back'),
   unknown('unknown');
 
@@ -53,6 +54,9 @@ mixin WebviewBridge {
               case WebviewCommand.requestLibraryPermission:
                 _requestLibraryPermission();
                 break;
+              case WebviewCommand.requestCameraPermission:
+                _requestCameraPermission();
+                break;
               case WebviewCommand.back:
                 _onBackCommand(context, message.origin);
                 break;
@@ -83,6 +87,14 @@ mixin WebviewBridge {
       return permissionBridge?.onRequestLibraryPermission();
     }
     final status = await Permission.mediaLibrary.request();
+    _checkStatus(status);
+  }
+
+  Future<void> _requestCameraPermission() async {
+    if (permissionBridge != null) {
+      return permissionBridge?.onRequestCameraPermission();
+    }
+    final status = await Permission.camera.request();
     _checkStatus(status);
   }
 

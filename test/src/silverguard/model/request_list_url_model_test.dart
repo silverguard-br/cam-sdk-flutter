@@ -11,12 +11,12 @@ void main() {
     test('should create instance with optional values', () {
       const model = RequestListUrlModel(
         reporterClientId: 'abc123',
-        reporterBranchNumber: '001',
-        reporterAccountNumber: '123456-7',
+        reporterBranchNumber: 001,
+        reporterAccountNumber: 1234567,
       );
       expect(model.reporterClientId, 'abc123');
-      expect(model.reporterBranchNumber, '001');
-      expect(model.reporterAccountNumber, '123456-7');
+      expect(model.reporterBranchNumber, 1);
+      expect(model.reporterAccountNumber, 1234567);
     });
 
     test('toJson should return correct map', () {
@@ -30,14 +30,14 @@ void main() {
     test('toJson should return correct map with optional values', () {
       const model = RequestListUrlModel(
         reporterClientId: 'xyz789',
-        reporterBranchNumber: '001',
-        reporterAccountNumber: '123456-7',
+        reporterBranchNumber: 001,
+        reporterAccountNumber: 1234567,
       );
       final json = model.toJson();
       expect(json, {
         'reporter_client_id': 'xyz789',
-        'reporter_branch_number': '001',
-        'reporter_account_number': '123456-7',
+        'reporter_branch_number': '1',
+        'reporter_account_number': '1234567',
       });
     });
   });
