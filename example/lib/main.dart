@@ -89,8 +89,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     clientSince: "2020-01-15",
                     clientBirth: "1985-03-22",
                     autofraudRisk: true,
-                    reporterBranchNumber: "1234",
-                    reporterAccountNumber: "12345678",
+                    reporterBranchNumber: 1234,
+                    reporterAccountNumber: 12345678,
                   ),
                 );
               },
@@ -102,8 +102,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   context,
                   RequestListUrlModel(
                     reporterClientId: "12345678901",
-                    reporterBranchNumber: "1234",
-                    reporterAccountNumber: "12345678",
+                    reporterBranchNumber: 1234,
+                    reporterAccountNumber: 12345678,
                   ),
                 );
               },

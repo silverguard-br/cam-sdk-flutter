@@ -1,7 +1,7 @@
 class RequestListUrlModel {
   final String reporterClientId;
-  final String? reporterBranchNumber;
-  final String? reporterAccountNumber;
+  final int? reporterBranchNumber;
+  final int? reporterAccountNumber;
 
   const RequestListUrlModel({
     required this.reporterClientId,
@@ -13,9 +13,9 @@ class RequestListUrlModel {
     return {
       "reporter_client_id": reporterClientId,
       if (reporterBranchNumber != null)
-        "reporter_branch_number": reporterBranchNumber!,
+        "reporter_branch_number": reporterBranchNumber!.toString(),
       if (reporterAccountNumber != null)
-        "reporter_account_number": reporterAccountNumber!,
+        "reporter_account_number": reporterAccountNumber!.toString(),
     };
   }
 }

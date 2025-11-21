@@ -21,8 +21,8 @@ void main() {
         clientSince: '2020-01-01',
         clientBirth: '1990-05-05',
         autofraudRisk: true,
-        reporterBranchNumber: '001',
-        reporterAccountNumber: '123456-7',
+        reporterBranchNumber: 001,
+        reporterAccountNumber: 1234567,
       );
 
       expect(model.toJson(), {
@@ -42,8 +42,8 @@ void main() {
         "client_since": '2020-01-01',
         "client_birth": '1990-05-05',
         "autofraud_risk": true,
-        'reporter_branch_number': '001',
-        'reporter_account_number': '123456-7',
+        'reporter_branch_number': 001,
+        'reporter_account_number': 1234567,
       });
     });
 
@@ -52,6 +52,11 @@ void main() {
         transactionId: 'tx456',
         transactionAmount: 50.0,
         transactionTime: '2024-06-02T15:30:00Z',
+        reporterClientName: 'Alice',
+        reporterClientId: 'client123',
+        contestedParticipantId: 'participant456',
+        counterpartyClientName: 'Bob',
+        counterpartyClientId: 'client789',
       );
 
       final json = model.toJson();
@@ -61,14 +66,14 @@ void main() {
       expect(json["transaction_time"], '2024-06-02T15:30:00Z');
       expect(json["pix_auto"], false);
       expect(json["autofraud_risk"], false);
+      expect(json.containsKey("reporter_client_name"), true);
+      expect(json.containsKey("reporter_client_id"), true);
+      expect(json.containsKey("contested_participant_id"), true);
+      expect(json.containsKey("counterparty_client_name"), true);
+      expect(json.containsKey("counterparty_client_id"), true);
 
-      expect(json.containsKey("transaction_description"), false);
-      expect(json.containsKey("reporter_client_name"), false);
-      expect(json.containsKey("reporter_client_id"), false);
-      expect(json.containsKey("contested_participant_id"), false);
-      expect(json.containsKey("counterparty_client_name"), false);
-      expect(json.containsKey("counterparty_client_id"), false);
       expect(json.containsKey("counterparty_client_key"), false);
+      expect(json.containsKey("transaction_description"), false);
       expect(json.containsKey("protocol_id"), false);
       expect(json.containsKey("client_id"), false);
       expect(json.containsKey("client_since"), false);
@@ -82,6 +87,12 @@ void main() {
         transactionId: 'tx789',
         transactionAmount: 200.0,
         transactionTime: '2024-06-03T10:00:00Z',
+        reporterClientName: 'Alice',
+        reporterClientId: 'client123',
+        contestedParticipantId: 'participant456',
+        counterpartyClientName: 'Bob',
+        counterpartyClientId: 'client789',
+        counterpartyClientKey: 'key987',
       );
 
       expect(model.pixAuto, false);
@@ -95,6 +106,11 @@ void main() {
         transactionTime: '2024-06-04T09:00:00Z',
         pixAuto: true,
         autofraudRisk: true,
+        reporterClientName: 'Alice',
+        reporterClientId: 'client123',
+        contestedParticipantId: 'participant456',
+        counterpartyClientName: 'Bob',
+        counterpartyClientId: 'client789',
       );
 
       expect(model.pixAuto, true);

@@ -3,11 +3,11 @@ class RequestUrlModel {
   final double transactionAmount;
   final String transactionTime;
   final String? transactionDescription;
-  final String? reporterClientName;
-  final String? reporterClientId;
-  final String? contestedParticipantId;
-  final String? counterpartyClientName;
-  final String? counterpartyClientId;
+  final String reporterClientName;
+  final String reporterClientId;
+  final String contestedParticipantId;
+  final String counterpartyClientName;
+  final String counterpartyClientId;
   final String? counterpartyClientKey;
   final String? protocolId;
   final bool pixAuto;
@@ -15,21 +15,21 @@ class RequestUrlModel {
   final String? clientSince;
   final String? clientBirth;
   final bool autofraudRisk;
-  final String? reporterBranchNumber;
-  final String? reporterAccountNumber;
+  final int? reporterBranchNumber;
+  final int? reporterAccountNumber;
 
   const RequestUrlModel({
     required this.transactionId,
     required this.transactionAmount,
     required this.transactionTime,
+    required this.reporterClientName,
+    required this.reporterClientId,
+    required this.contestedParticipantId,
+    required this.counterpartyClientName,
+    required this.counterpartyClientId,
     this.transactionDescription,
-    this.reporterClientName,
-    this.reporterClientId,
     this.reporterBranchNumber,
     this.reporterAccountNumber,
-    this.contestedParticipantId,
-    this.counterpartyClientName,
-    this.counterpartyClientId,
     this.counterpartyClientKey,
     this.protocolId,
     this.pixAuto = false,
@@ -46,15 +46,11 @@ class RequestUrlModel {
       "transaction_time": transactionTime,
       if (transactionDescription != null)
         "transaction_description": transactionDescription!,
-      if (reporterClientName != null)
-        "reporter_client_name": reporterClientName!,
-      if (reporterClientId != null) "reporter_client_id": reporterClientId!,
-      if (contestedParticipantId != null)
-        "contested_participant_id": contestedParticipantId!,
-      if (counterpartyClientName != null)
-        "counterparty_client_name": counterpartyClientName!,
-      if (counterpartyClientId != null)
-        "counterparty_client_id": counterpartyClientId!,
+      "reporter_client_name": reporterClientName,
+      "reporter_client_id": reporterClientId,
+      "contested_participant_id": contestedParticipantId,
+      "counterparty_client_name": counterpartyClientName,
+      "counterparty_client_id": counterpartyClientId,
       if (counterpartyClientKey != null)
         "counterparty_client_key": counterpartyClientKey!,
       if (protocolId != null) "protocol_id": protocolId!,
