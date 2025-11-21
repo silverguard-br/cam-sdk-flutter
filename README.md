@@ -39,6 +39,9 @@ Adicionar permissões necessárias no arquivo `android/app/src/main/AndroidManif
 <uses-permission
     android:name="android.permission.READ_EXTERNAL_STORAGE"
     android:maxSdkVersion="32" />
+
+<!-- Camera (necessário para adicionar foto direto da camera em anexos) -->
+<uses-permission android:name="android.permission.CAMERA" />
 ```
 
 ### iOS 
@@ -48,6 +51,9 @@ Adicionar permissão para microfone no arquivo `ios/Runner/Info.plist`
 ```xml
 <key>NSMicrophoneUsageDescription</key>
 <string>This app needs access to your microphone to record audio.</string>
+
+<key>NSCameraUsageDescription</key>
+<string>This app needs camera access to take photos/videos.</string>
 ```
 
 Também é necessário adicionar a permissão no arquivo `ios/Podfile` 
@@ -79,6 +85,9 @@ post_install do |installer|
 
                 ## dart: PermissionGroup.mediaLibrary
                 'PERMISSION_MEDIA_LIBRARY=1',
+
+                ## dart: PermissionGroup.camera
+                'PERMISSION_CAMERA=1',
             ]
         end
     end
@@ -222,7 +231,12 @@ class CustomBridgeWithPermission implements SilverguardPermissionBridge {
   
   @override
   void onRequestMicrophonePermission() {
-    // Código que será chamado no momento em que a webview for checar a permissão de acesso microfone
+    // Código que será chamado no momento em que a webview for checar a permissão de acesso ao microfone
+  }  
+
+  @override
+  void onRequestCameraPermission() {
+    // Código que será chamado no momento em que a webview for checar a permissão de acesso a camera
   }  
 }
 ```

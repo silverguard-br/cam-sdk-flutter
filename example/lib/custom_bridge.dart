@@ -33,4 +33,9 @@ class CustomBridgeWithPermission implements SilverguardPermissionBridge {
   void onRequestMicrophonePermission() {
     print('request microphone permission called');
   }
+
+  @override
+  void onRequestCameraPermission() {
+    print('request camera permission called');
+  }
 }

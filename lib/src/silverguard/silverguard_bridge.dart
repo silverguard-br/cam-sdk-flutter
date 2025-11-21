@@ -8,4 +8,6 @@ abstract interface class SilverguardPermissionBridge extends SilverguardBridge {
   void onRequestMicrophonePermission();
 
   void onRequestLibraryPermission();
+
+  void onRequestCameraPermission();
 }
